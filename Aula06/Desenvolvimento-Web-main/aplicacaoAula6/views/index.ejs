@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD de Produtos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <!-- Versão minimizada do CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <!-- Versão minimizada do JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <!-- AJAX-jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Versão minimizada do Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Versão minimizada do Boostrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="scripts/frontend.js" type="application/javascript"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>CRUD de Produtos</h1>
+        <h5>Nodejs + Express + MongoDB + Bootstrap + EJS</h5>
+
+        <input type="button" class="btn btn-primary" value="Novo" onclick="incluir()">
+
+        <table class="table table-hover">
+            <tr class="table-primary">
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Código</td>
+                <td>Descrição</td>
+                <td>Preço</td>
+            </tr>
+
+            <% dados.forEach(function(item) { %>
+                <tr>
+                    <td>
+                        <!--<img src="images/editar.png" width="24" onclick="editar(<%= item.codigo %>)" alt="Editar" />-->
+                        <i class="bi bi-pencil" style="font-size: 18px; color: cornflowerblue;" onclick="editar(<%= item.codigo %>)" alt="Editar"></i>
+                    </td>
+                    <td>
+                        <!--<img src="images/deletar.png" width="24" onclick="deletar(<%= item.codigo %>)" alt="Deletar" />-->
+                        <i class="bi bi-trash" style="font-size: 18px; color: cornflowerblue;" onclick="deletar(<%= item.codigo %>)" alt="Deletar"></i>
+                    </td>
+                    <td>
+                        <%= item.codigo %>
+                    </td>
+                    <td>
+                        <%= item.descricao %>
+                    </td>
+                    <td align="right">
+                        <%= item.preco.toFixed(2) %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+        <!-- Modal: Formulário -->
+        <%- include('editar_produto.ejs'); -%>
+        <!-- Modal: Confirmação -->
+        <%- include('excluir_produto.ejs'); -%>
+    </div>
+</body>
+</html>
